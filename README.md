@@ -1,3 +1,5 @@
+Please note, this github page is still under development. The documentation should be ironed out within the next couple of weeks. If you spot any issues or need extra information, email me at stanislav 'at' sokolenko.net.
+
 ## omfapy
 
 This package is meant support the Metabolic Flux Analysis methodology
