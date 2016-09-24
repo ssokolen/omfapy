@@ -1,0 +1,88 @@
+designation,category,category_short,enzyme.full,enzyme.ece,enzyme.short,path
+T_Ala,Transport,Trp,,,,
+T_Cys2,Transport,Trp,,,,
+T_Gly,Transport,Trp,,,,
+T_Ser,Transport,Trp,,,,
+T_Thr,Transport,Trp,,,,
+T_Arg,Transport,Trp,,,,
+T_Glu,Transport,Trp,,,,
+T_Gln,Transport,Trp,,,,
+T_His,Transport,Trp,,,,
+T_Pro,Transport,Trp,,,,
+T_Asp,Transport,Trp,,,,
+T_Asn,Transport,Trp,,,,
+T_Ile,Transport,Trp,,,,
+T_Leu,Transport,Trp,,,,
+T_Lys,Transport,Trp,,,,
+T_Met,Transport,Trp,,,,
+T_Phe,Transport,Trp,,,,
+T_Trp,Transport,Trp,,,,
+T_Tyr,Transport,Trp,,,,
+T_Val,Transport,Trp,,,,
+T_Lac,Transport,Trp,,,,
+T_Glc,Transport,Trp,,,,
+T_Amm,Transport,Trp,,,,
+T_O2,Transport,Trp,,,,
+T_CO2,Transport,Trp,,,,
+T_Carb,Transport,Trp,,,,
+T_OA,Transport,Trp,,,,
+T_DNA,Transport,Trp,,,,
+T_RNA,Transport,Trp,,,,
+T_Prot,Transport,Trp,,,,
+T_Glx,Transport,Trp,,,,
+T_FoOH,Transport,Trp,,,,
+T_AcOH,Transport,Trp,,,,
+T_Pyr,Transport,Trp,,,,
+T_Cit,Transport,Trp,,,,
+T_Mal,Transport,Trp,,,,
+T_Pgl,Transport,Trp,,,,
+T_Suc,Transport,Trp,,,,
+HK,"Glycolysis and PPP",Glc,hexokinase,2.7.1.1,HK,"[Glc -> G6P]"
+FBA,"Glycolysis and PPP",Glc,"fructose-biphosphate aldolase",4.1.2.13,FBA,"[G6P -> ADP]"
+PK,"Glycolysis and PPP",Glc,"pyruvate kinase",2.7.1.40,PK,"[ADP -> Pyr]"
+PPP,"Glycolysis and PPP",Glc,,,,"(G6P -> R5P)"
+LDH,"Pyr and AcCoA",Pyr,"lactate dehydrogenase",1.1.1.27,LDH,"[Pyr -> Lac]"
+ACAS,"Pyr and AcCoA",Pyr,"acetyl-coa synthetase",6.2.1.1,ACAS,"[AcCoA -> CoA + AcOH]"
+ME,"Pyr and AcCoA",Pyr,"nadp-malic enzyme",1.1.1.39,ME,"[Mal -> Pyr]"
+PDH,"Pyr and AcCoA",Pyr,"pyruvate dehydrogenase",1.2.4.1,PDH,"[Pyr -> AcCoA"
+CS,"TCA cycle",TCA,"citrate synthase",2.3.3.1,CS,"[AcCoA + Oxal -> Cit]"
+TCA_2,"TCA cycle",TCA,,,,"(Cit -> AKG)"
+AKGDH,"TCA cycle",TCA,"alpha-ketoglutarate dehydrogenase",1.2.4.2,AKGDH,"[AKG -> SucCoA]"
+SCS,"TCA cycle",TCA,"succinyl-coa synthetase",6.2.1.4,SCS,"[SucCoA -> Suc]"
+TCA_5,"TCA cycle",TCA,,,,"(Suc -> Mal)"
+mMalDH,"TCA cycle",TCA,"malate dehydrogenase 2",1.1.1.37,mMDH,"[Mal -> Oxal]"
+cMalDH,"TCA cycle",TCA,"malate dehydrogenase 1",1.1.1.37,cMDH,"[Oxal -> Mal]"
+ALT,Glutaminolysis,Glu,"alanine transaminase",2.6.1.2,ALT,"[Glu + Pyr -> AKG + Ala]"
+GLDH,Glutaminolysis,Glu,"glutamate dehydrogenase",1.4.1.4,GLDH,"[Glu -> AKG + Amm]"
+GS,Glutaminolysis,Glu,"glutamine synthetase",6.3.1.2,GS,"[Glu + AMM -> Gln]"
+AST,Glutaminolysis,Glu,"aspartate transaminase",2.6.1.1,AST,"[Glu + Oxal -> Asp + AKG]"
+Glu_5,Glutaminolysis,Glu,,,,"(Glu -> Pgl)"
+SDH,"AA Degradation",AA,"serine dehydratase",4.3.1.17,SDH,"[Ser -> Pyr + Amm]"
+SHMT,"AA Degradation",AA,"serine hydroxymethyltransferase",2.1.2.1,SHMT,"[Ser -> Gly]"
+GCS,"AA Degradation",AA,"glycine cleavage system",2.1.2.10,GCS,"[CO2 + Amm -> Gly]"
+AA_4,"AA Degradation",AA,,,,"(Thr -> Gly)"
+AA_5,"AA Degradation",AA,,,,"(Cys + AKG -> Glu + Pyr)"
+AA_6,"AA Degradation",AA,,,,"(His -> Glu)"
+AA_7,"AA Degradation",AA,,,,"(Arg -> Glu)"
+AA_8,"AA Degradation",AA,,,,"(Pro -> Glu)"
+ASNS,"AA Degradation",AA,"asparagine synthetase",6.3.5.4,ASNS,"[Asn -> Amm + Asp]"
+AA_10,"AA Degradation",AA,,,,"(Ile + AKG -> Glu + SucCoA)"
+AA_11,"AA Degradation",AA,,,,"(Leu + AKG + SucCoA -> Suc + Glu)"
+AA_12,"AA Degradation",AA,,,,"(Lys + AKG -> Glu + Amm)"
+AA_13,"AA Degradation",AA,,,,"(Met + Ser -> SucCoA + Cys + Amm)"
+PAH,"AA Degradation",AA,"phenylalanine hydroxylase",1.14.16.1,PAH,"[Phe -> Tyr]"
+AA_15,"AA Degradation",AA,,,,"(Trp -> Ala + Amm)"
+AA_16,"AA Degradation",AA,,,,"(Tyr + AKG + SucCoA -> Glu + Mal + Suc)"
+AA_17,"AA Degradation",AA,,,,"(Val + AKG -> SucCoA + Glu)"
+Carb,Macromolecules,Bio,,,,"( -> Carb)"
+OA,Macromolecules,Bio,,,,"( -> OA)"
+DNA,Macromolecules,Bio,,,,"( -> DNA)"
+RNA,Macromolecules,Bio,,,,"( -> RNA)"
+Prot,Macromolecules,Bio,,,,"( -> Prot)"
+mTAKG,Misc,Msc,,,,"(mMal + AKG -> mAKG + Mal)"
+mTCit,Misc,Msc,,,,"(mMal + Cit -> mCit + Mal)"
+GLAST,Misc,Msc,"glutamate aspartate transporter",,GLAST,"(Glu -> mGlu)"
+MPC,Misc,Msc,"mitochondrial pyruvate carrier",,MPC,"(Pyr -> mPyr)"
+THF,Misc,Msc,,,,"(FH4 + FoOH -> N5N10mFH4)"
+OX_1,Phosphorylation,Php,,,,"(NADH -> NAD)"
+OX_2,Phosphorylation,Php,,,,"(FADH -> FAD)"

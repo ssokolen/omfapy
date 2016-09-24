@@ -1,0 +1,1702 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <model id="model">
+    <notes>
+      <xhtml:body>
+	<xhtml:p>
+	Chinese Hamster Ovary cell MFA model.
+
+	The core of the model is originally from:
+
+	Altamirano C, Illanes A, Casablancas A, Gámez X, Cairó JJ, Gòdia C. 
+	Analysis of CHO cells metabolic redistribution in a glutamate-based 
+	defined medium in continuous culture. Biotechnol Prog. 2001 
+	Nov-Dec;17(6):1032-41. PubMed PMID:11735437.
+
+	Model modified slightly and converted to SBML format for BMC manuscript:
+
+	Sokolenko S, Quattrociocchi M, Aucoin MGA.
+	Identifying model error in metabolic flux analysis -- A generalized 
+	least squares approach. BMC Systems Biology.
+	</xhtml:p>
+      </xhtml:body>
+    </notes>
+    <listOfCompartments>
+      <compartment id="Extracellular" name="Extracellular" constant="true"/>
+      <compartment id="Cytosol" name="Cytosol" constant="true"/>
+      <compartment id="Mitochondria" name="Mitochondria" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="AKG" name="Oxoglutarate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mAKG" name="Oxoglutarate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mAcCoA" name="Acetyl coenzyme A" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AcOH" name="Acetate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eAcOH" name="Acetate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ala" name="Alaine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eAla" name="Alanine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Amm" name="Ammonia" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eAmm" name="Ammonia" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Arg" name="Arginine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eArg" name="Arginine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Asn" name="Asparagine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eAsn" name="Asparagine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Asp" name="Aspartate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eAsp" name="Aspartate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Carb" name="Carbohydrates" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Lumped biomass carbohydrates</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="bCarb" name="Carbohydrate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Sink for biomass carbohydrates</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="Cit" name="Citrate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mCit" name="Citrate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eCit" name="Citrate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="CO2" name="Carbon dioxide" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eCO2" name="Carbon dioxide" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Cys" name="Cysteine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eCys2" name="Cystine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="DHAP" name="Dihydroxyacetone phosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="DNA" name="Deoxyribonucleic acid" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Lumped biomass DNA</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="bDNA" name="Deoxyribonucleic acid" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Sink for biomass DNA</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="FoOH" name="Formate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eFoOH" name="Formate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="G6P" name="Glucose-6-phosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Glc" name="Glucose" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eGlc" name="Glucose" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Gln" name="Glutamine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eGln" name="Glutamine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Glu" name="Glutamate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eGlu" name="Glutamate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mGlu" name="Glutamate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Gly" name="Glycine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eGly" name="Glycine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eGlx" name="GlutaMAX" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="His" name="Histidine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eHis" name="Histidine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ile" name="Isoleucine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eIle" name="Isoleucine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Lac" name="Lactate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eLac" name="Lactate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Leu" name="Leucine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eLeu" name="Leucine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Lys" name="Lysine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eLys" name="Lysine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Mal" name="Malate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mMal" name="Malate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Met" name="Methionine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eMet" name="Methionine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="N5N10methyleneFH4" name="N5,N10-Methylenetetrahydrofolate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="O2" name="Oxygen" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eO2" name="Oxygen" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="OA" name="Oleic acid" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Lumped biomass lipids</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="bOA" name="Oleic acid" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Sink for biomass lipids</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="Oxal" name="Oxaloacetate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mOxal" name="Oxaloacetate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Pgl" name="Pyroglutamate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ePgl" name="Pyroglutamate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Phe" name="Phenylalanine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ePhe" name="Phenylalanine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Pro" name="Proline" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ePro" name="Proline" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Prot" name="Protein" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Lumped biomass protein</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="bProt" name="Protein" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Sink for biomass protein</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="Pyr" name="Pyruvate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mPyr" name="Pyruvate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ePyr" name="Pyruvate" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="R5P" name="Ribose-5-phosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RNA" name="Ribonucleic acid" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Lumped biomass RNA</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="bRNA" name="Ribonucleic acid" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+	<notes>
+	  <xhtml:body>
+	    <xhtml:p>Sink for biomass RNA</xhtml:p>
+	  </xhtml:body>
+	</notes>
+      </species>
+      <species id="Ser" name="Serine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eSer" name="Serine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mSuc" name="Succinate" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mSucCoA" name="Succinyl coenzyme A" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Thr" name="Threonine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eThr" name="Threonine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Trp" name="Tryptophan" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eTrp" name="Tryptophan" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Tyr" name="Tyrosine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eTyr" name="Tyrosine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Val" name="Valine" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="eVal" name="Valine" compartment="Extracellular" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ATP" name="Adenosine triphosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ADP" name="Adenosine diphoshate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="NADH" name="Nicotinamide adenine dinucleotide reduced" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="NAD" name="Nicotinamide adenine dinucleotide" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="NADPH" name="Nicotinamide adenine dinucleotide phosphate reduced" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="NADP" name="Nicotinamide adenine dinucleotide phosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mFADH" name="Flavin adenine dinucleotide reduced" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mFAD" name="Flavin adenine dinucleotide" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mCoA" name="Coenzyme A" compartment="Mitochondria" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="FH4" name="Tetrahydrofolic acid" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Pi" name="Organic phosphate" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="H2O" name="Water" compartment="Cytosol" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfReactions>
+      <reaction id="T_Ala" name="Alanine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eAla" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ala" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Cys2" name="Cystine transport and reduction" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eCys2" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Cys" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Gly" name="Glycine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eGly" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gly" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Ser" name="Serine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eSer" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ser" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Thr" name="Threonine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eThr" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Thr" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Arg" name="Argining transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eArg" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Arg" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Glu" name="Glutamate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eGlu" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Gln" name="Glutamine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eGln" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gln" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_His" name="Histidine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eHis" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="His" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Pro" name="Proline transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ePro" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pro" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Asp" name="Aspartate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eAsp" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Asp" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Asn" name="Asparagine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eAsn" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Asn" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Ile" name="Isoleucine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eIle" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ile" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Leu" name="Leucine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eLeu" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Leu" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Lys" name="Lysine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eLys" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Lys" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Met" name="Methionine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eMet" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Met" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Phe" name="Phenylalanine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ePhe" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Phe" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Trp" name="Tryptophan transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eTrp" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Trp" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Tyr" name="Tyrosine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eTyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Tyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Val" name="Valine transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eVal" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Val" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Lac" name="Lactate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eLac" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Lac" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Glc" name="Glucose transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eGlc" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glc" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Amm" name="Ammonia transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eAmm" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_O2" name="Oxygen diffusion" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_CO2" name="Carbon dioxide diffusion" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eCO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Carb" name="Carbohydrate biomass sink" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="bCarb" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Carb" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_OA" name="Lipid biomass sink" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="bOA" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="OA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_DNA" name="DNA biomass sink" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="bDNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="DNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_RNA" name="RNA biomass sink" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="bRNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Prot" name="Protein biomass sink" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="bProt" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Prot" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Glx" name="Glutamax transport and hydrolysis" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eGlx" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ala" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Gln" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_FoOH" name="Formate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eFoOH" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FoOH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_AcOH" name="Acetate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eAcOH" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AcOH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Pyr" name="Pyruvate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ePyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Cit" name="Citrate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="eCit" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Cit" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="T_Pgl" name="Pyroglutamate transport" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Transport reaction</xhtml:p>
+            <xhtml:p>Category: Transport</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ePgl" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pgl" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="HK" name="Hexokinase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Hexokinase</xhtml:p>
+            <xhtml:p>ECE: 2.7.1.1</xhtml:p>
+            <xhtml:p>Category: Glycolysis and PPP</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glc" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="G6P" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="FBA" name="Fructose-biphosphate aldolase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Fructose-biphosphate aldolase</xhtml:p>
+            <xhtml:p>ECE: 4.1.2.13</xhtml:p>
+            <xhtml:p>Category: Glycolysis and PPP</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="G6P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="DHAP" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="PK" name="Pyruvate kinase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Pyruvate kinase</xhtml:p>
+            <xhtml:p>ECE: 2.7.1.40</xhtml:p>
+            <xhtml:p>Category: Glycolysis and PPP</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="DHAP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ATP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="PPP" name="PPP" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Glycolysis and PPP</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="G6P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NADPH" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="R5P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="LDH" name="Lactate dehydrogenase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Lactate dehydrogenase</xhtml:p>
+            <xhtml:p>ECE: 1.1.1.27</xhtml:p>
+            <xhtml:p>Category: Pyr and AcCoA</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Lac" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="ACAS" name="Acetyl-CoA synthetase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Acetyl-CoA synthetase</xhtml:p>
+            <xhtml:p>ECE: 6.2.1.1</xhtml:p>
+            <xhtml:p>Category: Pyr and AcCoA</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mAcCoA" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AcOH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="ME" name="NADP-malic enzyme" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: NADP-malic enzyme</xhtml:p>
+            <xhtml:p>ECE: 1.1.1.39</xhtml:p>
+            <xhtml:p>Category: Pyr and AcCoA</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Mal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="PDH" name="Pyruvate dehydrogenase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Pyruvate dehydrogenase</xhtml:p>
+            <xhtml:p>ECE: 1.2.4.1</xhtml:p>
+            <xhtml:p>Category: Pyr and AcCoA</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mPyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mAcCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="CS" name="Citrate synthase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Citrate synthase</xhtml:p>
+            <xhtml:p>ECE: 2.3.3.1</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mAcCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mOxal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mCit" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="TCA_2" name="TCA_2" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mCit" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mAKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AKGDH" name="Alpha-ketoglutarate dehydrogenase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Alpha-ketoglutarate dehydrogenase</xhtml:p>
+            <xhtml:p>ECE: 1.2.4.2</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mAKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="SCS" name="Succinyl-CoA synthetase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Succinyl-CoA synthetase</xhtml:p>
+            <xhtml:p>ECE: 6.2.1.4</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mSuc" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="TCA_5" name="TCA_5" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mSuc" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mMal" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="mMalDH" name="Malate dehydrogenase 2" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Malate dehydrogenase 2</xhtml:p>
+            <xhtml:p>ECE: 1.1.1.37</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mMal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mOxal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="cMalDH" name="Malate dehydrogenase 1" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Malate dehydrogenase 1</xhtml:p>
+            <xhtml:p>ECE: 1.1.1.37</xhtml:p>
+            <xhtml:p>Category: TCA cycle</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Oxal" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Mal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="ALT" name="Alanine transaminase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Alanine transaminase</xhtml:p>
+            <xhtml:p>ECE: 2.6.1.2</xhtml:p>
+            <xhtml:p>Category: Glutaminolysis</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Ala" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="GLDH" name="Glutamate dehydrogenase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Glutamate dehydrogenase</xhtml:p>
+            <xhtml:p>ECE: 1.4.1.4</xhtml:p>
+            <xhtml:p>Category: Glutaminolysis</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mGlu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mAKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="GS" name="Glutamine synthetase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Glutamine synthetase</xhtml:p>
+            <xhtml:p>ECE: 6.3.1.2</xhtml:p>
+            <xhtml:p>Category: Glutaminolysis</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gln" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AST" name="Aspartate transaminase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Aspartate transaminase</xhtml:p>
+            <xhtml:p>ECE: 2.6.1.1</xhtml:p>
+            <xhtml:p>Category: Glutaminolysis</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Oxal" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Asp" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Glu_5" name="Glu_5" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Glutaminolysis</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pgl" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="SDH" name="Serine dehydratase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Serine dehydratase</xhtml:p>
+            <xhtml:p>ECE: 4.3.1.17</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Ser" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="SHMT" name="Serine hydroxymethyltransferase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Serine hydroxymethyltransferase</xhtml:p>
+            <xhtml:p>ECE: 2.1.2.1</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Ser" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gly" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="GCS" name="Glycine cleavage system" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Glycine cleavage system</xhtml:p>
+            <xhtml:p>ECE: 2.1.2.10</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gly" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_4" name="AA_4" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Thr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Gly" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mAcCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_5" name="AA_5" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Cys" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_6" name="AA_6" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="His" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_7" name="AA_7" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Arg" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_8" name="AA_8" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Pro" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="ASNS" name="Asparagine synthetase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Asparagine synthetase</xhtml:p>
+            <xhtml:p>ECE: 6.3.5.4</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Asn" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Asp" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_10" name="AA_10" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Ile" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mAcCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_11" name="AA_11" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Leu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mAcCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mSuc" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_12" name="AA_12" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Lys" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="0.50000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mAcCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_13" name="AA_13" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Met" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Ser" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Cys" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="4.00000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="PAH" name="Phenylalanine hydroxylase" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Phenylalanine hydroxylase</xhtml:p>
+            <xhtml:p>ECE: 1.14.16.1</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Phe" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Tyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_15" name="AA_15" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Trp" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.00000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mAcCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="4.00000" constant="true"/> 
+          <speciesReference species="Ala" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Amm" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_16" name="AA_16" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Tyr" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mAcCoA" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mSuc" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="AA_17" name="AA_17" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: AA Degradation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Val" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mSucCoA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Bio_Carb" name="Bio_Carb" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Macromolecules</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="G6P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="3.50000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Carb" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Bio_OA" name="Bio_OA" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Macromolecules</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mCit" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="17.00000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="17.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="OA" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="mMal" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="Oxal" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="17.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="17.00000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="7.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="9.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Bio_DNA" name="Bio_DNA" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Macromolecules</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Gln" stoichiometry="1.90000" constant="true"/> 
+          <speciesReference species="Asp" stoichiometry="1.30000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="7.50000" constant="true"/> 
+          <speciesReference species="Gly" stoichiometry="0.50000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.30000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="0.70000" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="0.30000" constant="true"/> 
+          <speciesReference species="R5P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="0.30000" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="0.50000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="3.10000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="1.90000" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="0.80000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="7.50000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="7.50000" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="1.30000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="0.70000" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="0.30000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="0.30000" constant="true"/> 
+          <speciesReference species="DNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Bio_RNA" name="Bio_RNA" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Macromolecules</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Gln" stoichiometry="2.09100" constant="true"/> 
+          <speciesReference species="Asp" stoichiometry="1.19400" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="7.48700" constant="true"/> 
+          <speciesReference species="Gly" stoichiometry="0.48900" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="0.97800" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="0.80600" constant="true"/> 
+          <speciesReference species="NADP" stoichiometry="0.97800" constant="true"/> 
+          <speciesReference species="R5P" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="0.19400" constant="true"/> 
+          <speciesReference species="CO2" stoichiometry="0.48900" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.59000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="0.09700" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Glu" stoichiometry="2.09100" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="0.68300" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="7.48700" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="7.48700" constant="true"/> 
+          <speciesReference species="FH4" stoichiometry="0.97800" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="0.80600" constant="true"/> 
+          <speciesReference species="NADPH" stoichiometry="0.97800" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="0.19400" constant="true"/> 
+          <speciesReference species="RNA" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="Bio_Prot" name="Bio_Prot" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Macromolecules</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Ala" stoichiometry="0.09500" constant="true"/> 
+          <speciesReference species="Asp" stoichiometry="0.04800" constant="true"/> 
+          <speciesReference species="Asn" stoichiometry="0.03900" constant="true"/> 
+          <speciesReference species="Arg" stoichiometry="0.06300" constant="true"/> 
+          <speciesReference species="Cys" stoichiometry="0.02800" constant="true"/> 
+          <speciesReference species="Gln" stoichiometry="0.05200" constant="true"/> 
+          <speciesReference species="Glu" stoichiometry="0.06400" constant="true"/> 
+          <speciesReference species="Gly" stoichiometry="0.07800" constant="true"/> 
+          <speciesReference species="His" stoichiometry="0.02200" constant="true"/> 
+          <speciesReference species="Ile" stoichiometry="0.05200" constant="true"/> 
+          <speciesReference species="Leu" stoichiometry="0.08800" constant="true"/> 
+          <speciesReference species="Lys" stoichiometry="0.08900" constant="true"/> 
+          <speciesReference species="Met" stoichiometry="0.02000" constant="true"/> 
+          <speciesReference species="Phe" stoichiometry="0.02100" constant="true"/> 
+          <speciesReference species="Pro" stoichiometry="0.02800" constant="true"/> 
+          <speciesReference species="Ser" stoichiometry="0.05700" constant="true"/> 
+          <speciesReference species="Thr" stoichiometry="0.06100" constant="true"/> 
+          <speciesReference species="Trp" stoichiometry="0.00600" constant="true"/> 
+          <speciesReference species="Tyr" stoichiometry="0.02000" constant="true"/> 
+          <speciesReference species="Val" stoichiometry="0.05900" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="4.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Prot" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ADP" stoichiometry="4.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="4.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="mTAKG" name="mTAKG" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Misc</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mMal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="AKG" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mAKG" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="mTCit" name="mTCit" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Misc</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="mMal" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Cit" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mCit" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Mal" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="GLAST" name="Glutamate aspartate transporter" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Glutamate aspartate transporter</xhtml:p>
+            <xhtml:p>ECE: NA</xhtml:p>
+            <xhtml:p>Category: Misc</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Glu" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mGlu" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="MPC" name="Mitochondrial pyruvate carrier" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Enzymatic reaction</xhtml:p>
+            <xhtml:p>Enzyme: Mitochondrial pyruvate carrier</xhtml:p>
+            <xhtml:p>ECE: NA</xhtml:p>
+            <xhtml:p>Category: Misc</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="Pyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mPyr" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="THF" name="THF" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Misc</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="FH4" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="FoOH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="ATP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ADP" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="N5N10methyleneFH4" stoichiometry="1.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="OX_1" name="OX_1" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Phosphorylation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ADP" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="NADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="0.50000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="3.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ATP" stoichiometry="3.00000" constant="true"/> 
+          <speciesReference species="NAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="4.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+      <reaction id="OX_2" name="OX_2" reversible="true" fast="false">
+        <notes>
+          <xhtml:body>
+            <xhtml:p>Lumped reaction</xhtml:p>
+            <xhtml:p>Category: Phosphorylation</xhtml:p>
+          </xhtml:body>
+        </notes>
+        <listOfReactants>
+          <speciesReference species="ADP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mFADH" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="O2" stoichiometry="0.50000" constant="true"/> 
+          <speciesReference species="Pi" stoichiometry="2.00000" constant="true"/> 
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ATP" stoichiometry="2.00000" constant="true"/> 
+          <speciesReference species="mFAD" stoichiometry="1.00000" constant="true"/> 
+          <speciesReference species="H2O" stoichiometry="2.00000" constant="true"/> 
+        </listOfProducts>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
+

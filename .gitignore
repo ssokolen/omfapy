@@ -1,0 +1,13 @@
+# Ignore vim swp files
+*~
+*.swp
+*.swo
+
+# Ignoring generated .db and .pdf files
+*.db
+*.pdf
+
+# Ignoring fortran compilation files
+*.o
+*.mod
+*.so
